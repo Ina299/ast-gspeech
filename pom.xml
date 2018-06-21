@@ -38,10 +38,11 @@ limitations under the License.
     <url>http://www.google.com</url>
   </organization>
 
-
-
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <protobuf-maven-plugin.version>0.5.0</protobuf-maven-plugin.version>
+    <grpc.version>1.6.1</grpc.version>
+    <protobuf.version>3.3.0</protobuf.version>
   </properties>
 
   <profiles>
@@ -59,15 +60,6 @@ limitations under the License.
           </snapshots>
         </repository>
       </repositories>
-    </profile>
-    <profile>
-      <id>jdk7</id>
-      <activation>
-        <jdk>1.7</jdk>
-      </activation>
-      <properties>
-        <jdk.version>1.7</jdk.version>
-      </properties>
     </profile>
     <profile>
       <id>jdk8</id>
@@ -119,8 +111,31 @@ limitations under the License.
     <dependency>
       <groupId>io.grpc</groupId>
       <artifactId>grpc-all</artifactId>
-      <version>0.13.2</version>
+      <version>${grpc.version}</version>
     </dependency>
+    <dependency>
+      <groupId>io.grpc</groupId>
+      <artifactId>grpc-netty</artifactId>
+      <version>${grpc.version}</version>
+    </dependency>
+       
+    <dependency>
+      <groupId>io.grpc</groupId>
+      <artifactId>grpc-protobuf</artifactId>
+      <version>${grpc.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>io.grpc</groupId>
+      <artifactId>grpc-stub</artifactId>
+      <version>${grpc.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>com.google.auth</groupId>
+        <artifactId>google-auth-library-oauth2-http</artifactId>
+        <version>0.9.1</version>
+    </dependency>
+
     <dependency>
       <groupId>com.google.oauth-client</groupId>
       <artifactId>google-oauth-client</artifactId>
@@ -196,9 +211,9 @@ limitations under the License.
             transitively depending on the protobuf-java version that
             grpc depends on.
           -->
-          <protocArtifact>com.google.protobuf:protoc:3.0.0-beta-2:exe:${os.detected.classifier}</protocArtifact>
+          <protocArtifact>com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}</protocArtifact>
           <pluginId>grpc-java</pluginId>
-          <pluginArtifact>io.grpc:protoc-gen-grpc-java:0.13.2:exe:${os.detected.classifier}</pluginArtifact>
+          <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}</pluginArtifact>
         </configuration>
         <executions>
           <execution>
